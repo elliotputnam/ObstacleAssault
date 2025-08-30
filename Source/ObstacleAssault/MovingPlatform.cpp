@@ -16,16 +16,6 @@ void AMovingPlatform::BeginPlay()
 {
 	Super::BeginPlay();
 
-	UE_LOG(LogTemp, Display, TEXT("MyVector.X: %f"), MyVector.X);
-	UE_LOG(LogTemp, Display, TEXT("MyVector.Y: %f"), MyVector.Y);
-	UE_LOG(LogTemp, Display, TEXT("MyVector.Z: %f"), MyVector.Z);
-	
-	MyVector.X = -1650.0f;
-	MyVector.Y = -1230.0f;
-	MyVector.Z = 370.0f;
-
-	SetActorLocation(MyVector);
-
 }
 
 // Called every frame
@@ -33,15 +23,12 @@ void AMovingPlatform::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	SetActorLocation(MyVector);
-	if (MyVector.Z < 700.0f)
-	{
-		MyVector.Z += 1.0f;
-	}
-	else
-	{
-		MyVector.Z = 370.0f;
-	}
+	FVector CurrentLocation = GetActorLocation();
+
+	CurrentLocation.X = CurrentLocation.X + (100 * DeltaTime);
+
+	SetActorLocation(CurrentLocation);
+	
 
 }
 
